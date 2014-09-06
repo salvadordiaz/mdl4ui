@@ -3,6 +3,7 @@ package org.mdl4ui.gwt.sample.client;
 import org.mdl4ui.base.model.ScenarioID;
 import org.mdl4ui.fields.model.ClientFactory;
 import org.mdl4ui.fields.model.DefaultWizard;
+import org.mdl4ui.fields.model.Wizard;
 import org.mdl4ui.fields.model.event.FieldEvent;
 import org.mdl4ui.fields.model.event.FieldEventListener;
 import org.mdl4ui.fields.sample.context.SampleContext;
@@ -29,7 +30,7 @@ public class Sample implements EntryPoint {
         GWT.log("Using scenario " + scenario);
 
         ClientFactory clientFactory = GWT.create(GwtClientFactory.class);
-        DefaultWizard wizard = new DefaultWizard(new SampleContext(), clientFactory);
+        Wizard wizard = new DefaultWizard(new SampleContext(), clientFactory);
         wizard.addScreens(scenario);
         wizard.addFieldListener(new FieldEventListener() {
             @Override
@@ -41,6 +42,6 @@ public class Sample implements EntryPoint {
         WizardView wizardView = new WizardView(wizard);
         wizardView.displayScreen(wizard, scenario.screens().get(0));
 
-        RootPanel.get("content").add(wizardView);
+        RootPanel.get().add(wizardView);
     }
 }

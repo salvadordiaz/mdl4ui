@@ -65,10 +65,6 @@ public class DefaultWizard implements Wizard {
         return screens;
     }
 
-    public ClientFactory getClientFactory() {
-        return clientFactory;
-    }
-
     @Override
     public ScenarioID getScenario() {
         return scenario;
@@ -88,7 +84,7 @@ public class DefaultWizard implements Wizard {
                             break;
                         case GROUP:
                             ArrayList<Field> fields = new ArrayList<Field>();
-                            for (FieldID fieldId : ((GroupID) child).fields()) {
+                            for (FieldID fieldId : child.fields()) {
                                 fields.add(createField(screenID, fieldId));
                             }
                             blockItems.add(new Group((GroupID) child, fields));
@@ -188,7 +184,7 @@ public class DefaultWizard implements Wizard {
         }
     }
 
-    private final void updateBehaviour(Field field, FieldEvent event) {
+    private void updateBehaviour(Field field, FieldEvent event) {
         clientFactory.getBehaviourFactory().get(field.getFieldID()).updateValue(field, context, event);
         boolean visibleBeforeUpdate = field.getState() != FieldState.HIDDEN;
         boolean visibleAfterUpdate = isVisible(field.getFieldID(), event);
@@ -236,7 +232,7 @@ public class DefaultWizard implements Wizard {
 
         // update field state according to validation result
         final Field validated = getField(getScreen(field).getScreenID(), validation.getFieldID());
-        validated.setState(validation != null && !validation.isValid() ? ERROR : SET, validation); // update field state
+        validated.setState(!validation.isValid() ? ERROR : SET, validation); // update field state
         return validation;
     }
 
