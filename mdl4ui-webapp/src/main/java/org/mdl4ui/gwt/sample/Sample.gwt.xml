@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 1.6.2//EN" "http://google-web-toolkit.googlecode.com/svn/tags/1.6.2/distro-source/core/src/gwt-module.dtd">
 <module rename-to='sample'>
-
   <!-- Inherit the core Web Toolkit stuff. -->
   <inherits name='org.mdl4ui.gwt.model.Model' />
-
-  <!-- Specify the app entry point class. -->
-  <entry-point class='org.mdl4ui.gwt.sample.client.Sample' />
 
   <source path='client'>
     <exclude name="**DesktopBundle.java" />
@@ -17,7 +13,7 @@
     <exclude name="**Mock**Factory.java" />
   </source>
 
-  <replace-with class="org.mdl4ui.gwt.sample.client.factory.SampleScreenFactory">
-    <when-type-is class="org.mdl4ui.gwt.model.client.factory.GwtScreenFactory" />
-  </replace-with>
+  <!-- Specify the app entry point class. -->
+  <entry-point class='org.mdl4ui.gwt.sample.client.Sample' />
+
 </module>

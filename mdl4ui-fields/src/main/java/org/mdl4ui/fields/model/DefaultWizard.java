@@ -26,6 +26,8 @@ import org.mdl4ui.fields.model.event.FieldEvent;
 import org.mdl4ui.fields.model.event.FieldEventListener;
 import org.mdl4ui.fields.model.validation.FieldValidation;
 
+import com.google.inject.Inject;
+
 public class DefaultWizard implements Wizard {
 
     private final ClientFactory clientFactory;
@@ -35,6 +37,7 @@ public class DefaultWizard implements Wizard {
     private ScenarioID scenario;
     private Screen currentScreen;
 
+    @Inject
     public DefaultWizard(WizardContext context, ClientFactory clientFactory) {
         this.clientFactory = clientFactory;
         this.screens = new HashMap<ScreenID, Screen>();

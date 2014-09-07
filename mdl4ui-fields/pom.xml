@@ -7,7 +7,6 @@
     <version>0.1-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.mdl4ui</groupId>
   <artifactId>mdl4ui-fields</artifactId>
   <name>mdl4ui-fields</name>
   <dependencies>
@@ -19,6 +18,11 @@
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-user</artifactId>
       <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.gwt.inject</groupId>
+      <artifactId>gin</artifactId>
+      <version>2.1.2</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>

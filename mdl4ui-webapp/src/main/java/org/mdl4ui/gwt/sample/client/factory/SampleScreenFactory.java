@@ -7,9 +7,12 @@ import org.mdl4ui.gwt.model.client.ui.ScreenView;
 import org.mdl4ui.gwt.sample.client.ui.RegistrationDoneView;
 import org.mdl4ui.ui.sample.EScreenSample;
 
+import com.google.inject.Inject;
+
 public class SampleScreenFactory implements GwtScreenFactory {
 
-    private SampleScreenFactory() {
+    @Inject
+    public SampleScreenFactory() {
     }
 
     @Override

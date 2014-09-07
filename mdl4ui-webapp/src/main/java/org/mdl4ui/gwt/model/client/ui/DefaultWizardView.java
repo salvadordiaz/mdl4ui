@@ -3,6 +3,7 @@ package org.mdl4ui.gwt.model.client.ui;
 import static org.mdl4ui.fields.model.event.FieldEvent.newEvent;
 import static org.mdl4ui.fields.model.event.FieldEvent.releaseSourceEvent;
 
+import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,7 @@ public class DefaultWizardView implements WizardView {
     private final Container container = new Container();
     private final Map<ScreenID, ScreenView> screens = new HashMap<ScreenID, ScreenView>();
 
+    @Inject
     public DefaultWizardView(final Wizard wizard, GwtScreenFactory screenFactory) {
         Screen firstScreen = null;
         for (final ScreenID screenID : wizard.getScreens().keySet()) {

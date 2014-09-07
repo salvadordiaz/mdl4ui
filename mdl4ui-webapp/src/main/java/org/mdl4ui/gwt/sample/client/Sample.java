@@ -1,20 +1,18 @@
 package org.mdl4ui.gwt.sample.client;
 
 import org.mdl4ui.base.model.ScenarioID;
-import org.mdl4ui.fields.model.ClientFactory;
-import org.mdl4ui.fields.model.DefaultWizard;
 import org.mdl4ui.fields.model.Wizard;
+import org.mdl4ui.fields.model.WizardView;
 import org.mdl4ui.fields.model.event.FieldEvent;
 import org.mdl4ui.fields.model.event.FieldEventListener;
-import org.mdl4ui.fields.sample.context.SampleContext;
-import org.mdl4ui.gwt.model.client.factory.GwtClientFactory;
-import org.mdl4ui.gwt.model.client.ui.WizardView;
+import org.mdl4ui.fields.model.inject.WizardGinjector;
+import org.mdl4ui.gwt.sample.client.factory.SampleWizardGinjector;
 import org.mdl4ui.ui.sample.EScenarioSample;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.IsWidget;
 
 public class Sample implements EntryPoint {
 
@@ -29,8 +27,8 @@ public class Sample implements EntryPoint {
         }
         GWT.log("Using scenario " + scenario);
 
-        ClientFactory clientFactory = GWT.create(GwtClientFactory.class);
-        Wizard wizard = new DefaultWizard(new SampleContext(), clientFactory);
+        WizardGinjector injector = GWT.create(SampleWizardGinjector.class);
+        Wizard wizard = injector.getWizard();
         wizard.addScreens(scenario);
         wizard.addFieldListener(new FieldEventListener() {
             @Override
@@ -38,10 +36,9 @@ public class Sample implements EntryPoint {
                 GWT.log(event.toString());
             }
         });
-
-        WizardView wizardView = new WizardView(wizard);
-        wizardView.displayScreen(wizard, scenario.screens().get(0));
-
-        RootPanel.get().add(wizardView);
+        
+        WizardView view = injector.getView();
+        view.displayScreen(wizard, scenario.screens().get(0));
+        injector.getWizardContainer().add(view);
     }
 }
