@@ -20,8 +20,6 @@ public interface Wizard {
 
     Map<ScreenID, Screen> getScreens();
 
-    void addScreens(ScenarioID application);
-
     void displayScreen(Screen screen);
 
     void submit(Block block);

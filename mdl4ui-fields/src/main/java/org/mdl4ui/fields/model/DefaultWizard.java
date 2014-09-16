@@ -33,15 +33,16 @@ public class DefaultWizard implements Wizard {
     private final ClientFactory clientFactory;
     private final Map<ScreenID, Screen> screens;
     private final WizardContext context;
+    private final ScenarioID scenario;
 
-    private ScenarioID scenario;
     private Screen currentScreen;
 
     @Inject
-    public DefaultWizard(WizardContext context, ClientFactory clientFactory) {
+    public DefaultWizard(WizardContext context, ClientFactory clientFactory, ScenarioID scenario) {
         this.clientFactory = clientFactory;
-        this.screens = new HashMap<ScreenID, Screen>();
+        this.scenario = scenario;
         this.context = context;
+        this.screens = createScreens(scenario);
     }
 
     @Override
@@ -73,36 +74,44 @@ public class DefaultWizard implements Wizard {
         return scenario;
     }
 
-    @Override
-    public void addScreens(ScenarioID scenario) {
-        this.scenario = scenario;
+    private Map<ScreenID, Screen> createScreens(ScenarioID scenario) {
+        final Map<ScreenID, Screen> screens = new HashMap<>();
         for (ScreenID screenID : scenario.screens()) {
-            List<Block> blocks = new ArrayList<Block>();
+            List<Block> blocks = new ArrayList<>();
             for (BlockID blockId : screenID.blocks()) {
-                List<Element> blockItems = new ArrayList<Element>();
-                for (ElementID child : blockId.childs()) {
-                    switch (child.elementType()) {
-                        case FIELD:
-                            blockItems.add(createField(screenID, (FieldID) child));
-                            break;
-                        case GROUP:
-                            ArrayList<Field> fields = new ArrayList<Field>();
-                            for (FieldID fieldId : child.fields()) {
-                                fields.add(createField(screenID, fieldId));
-                            }
-                            blockItems.add(new Group((GroupID) child, fields));
-                            break;
-                    }
-                }
-                Block block = new Block(clientFactory.getLabelFactory().get(blockId), blockId);
-                block.add(blockItems);
-                blocks.add(block);
+                blocks.add(createBlock(screenID, blockId));
             }
             Screen screen = new Screen(screenID, blocks);
             screens.put(screenID, screen);
         }
+        return screens;
     }
 
+    private Block createBlock(ScreenID screenID, BlockID blockId) {
+        List<Element> fields = new ArrayList<>();
+        for (ElementID child : blockId.childs()) {
+            switch (child.elementType()) {
+                case FIELD:
+                    fields.add(createField(screenID, (FieldID) child));
+                    break;
+                case GROUP:
+                    fields.add(createGroup(screenID, (GroupID) child));
+                    break;
+            }
+        }
+        Block block = new Block(clientFactory.getLabelFactory().get(blockId), blockId);
+        block.add(fields);
+        return block;
+    }
+
+    private Group createGroup(ScreenID screenID, GroupID groupID){
+        ArrayList<Field> fields = new ArrayList<>();
+        for (FieldID fieldId : groupID.fields()) {
+            fields.add(createField(screenID, fieldId));
+        }
+        return new Group(groupID, fields);
+    }
+    
     private Field createField(ScreenID screenId, FieldID fieldId) {
         Field field = new Field(fieldId, clientFactory.getLabelFactory().get(fieldId),//
                         clientFactory.getHelpFactory().get(fieldId),//

@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.mdl4ui.base.model.BlockID;
 import org.mdl4ui.base.model.GroupID;
+import org.mdl4ui.base.model.ScenarioID;
 import org.mdl4ui.base.model.ScreenID;
 import org.mdl4ui.fields.model.*;
 import org.mdl4ui.fields.model.event.EventProperty;
@@ -19,6 +20,7 @@ import org.mdl4ui.gwt.model.client.factory.GwtScreenFactory;
 import com.github.gwtbootstrap.client.ui.Container;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
@@ -27,16 +29,13 @@ import com.google.gwt.user.client.ui.Widget;
 public class DefaultWizardView implements WizardView {
 
     private final Container container = new Container();
-    private final Map<ScreenID, ScreenView> screens = new HashMap<ScreenID, ScreenView>();
+    private final Map<ScreenID, ScreenView> screenViews = new HashMap<>();
 
     @Inject
-    public DefaultWizardView(final Wizard wizard, GwtScreenFactory screenFactory) {
-        Screen firstScreen = null;
-        for (final ScreenID screenID : wizard.getScreens().keySet()) {
-            final ScreenView screenView = screenFactory.getView(wizard.getScreens().get(screenID));
-            if (firstScreen == null) {
-                firstScreen = screenView.getScreen();
-            }
+    public DefaultWizardView(final Wizard wizard, GwtScreenFactory screenFactory, final ScenarioID scenario) {
+        Map<ScreenID, Screen> screens = wizard.getScreens();
+        for (final ScreenID screenID : screens.keySet()) {
+            final ScreenView screenView = screenFactory.getView(screens.get(screenID));
 
             for (final Field field : screenView.getScreen().fields()) {
                 @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -65,8 +64,15 @@ public class DefaultWizardView implements WizardView {
                 });
             }
 
-            screens.put(screenID, screenView);
+            this.screenViews.put(screenID, screenView);
         }
+
+        container.addAttachHandler(new AttachEvent.Handler() {
+            @Override
+            public void onAttachOrDetach(AttachEvent attachEvent) {
+                displayScreen(wizard, scenario.screens().get(0));
+            }
+        });
     }
 
     @Override
@@ -141,7 +147,7 @@ public class DefaultWizardView implements WizardView {
 
     public void displayScreen(Wizard wizard, ScreenID screenID) {
         container.clear();
-        ScreenView screenView = screens.get(screenID);
+        ScreenView screenView = screenViews.get(screenID);
         if (screenView == null) {
             throw new IllegalArgumentException("unknow screen id : " + screenID);
         }
