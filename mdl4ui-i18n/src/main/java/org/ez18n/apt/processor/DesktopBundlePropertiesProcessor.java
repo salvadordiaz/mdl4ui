@@ -14,13 +14,18 @@ package org.ez18n.apt.processor;
 
 import static javax.lang.model.SourceVersion.RELEASE_6;
 
+import javax.annotation.processing.Processor;
 import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.annotation.processing.SupportedSourceVersion;
+import javax.lang.model.SourceVersion;
 
 import org.ez18n.apt.LabelTemplateMethod;
 
+import com.google.auto.service.AutoService;
+
 @SupportedAnnotationTypes(value = "org.ez18n.MessageBundle")
-@SupportedSourceVersion(RELEASE_6)
+@SupportedSourceVersion(SourceVersion.RELEASE_8)
+@AutoService(Processor.class)
 public final class DesktopBundlePropertiesProcessor extends BundlePropertiesProcessor {
 
     @Override

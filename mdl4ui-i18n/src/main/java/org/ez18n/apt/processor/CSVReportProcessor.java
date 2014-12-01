@@ -24,11 +24,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.annotation.processing.AbstractProcessor;
-import javax.annotation.processing.FilerException;
-import javax.annotation.processing.RoundEnvironment;
-import javax.annotation.processing.SupportedAnnotationTypes;
-import javax.annotation.processing.SupportedSourceVersion;
+import javax.annotation.processing.*;
+import javax.lang.model.SourceVersion;
 import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
@@ -44,8 +41,11 @@ import org.ez18n.apt.LabelTemplateMethod;
 import org.ez18n.apt.base.TemplateAnnotation;
 import org.ez18n.apt.base.TemplateParam;
 
+import com.google.auto.service.AutoService;
+
 @SupportedAnnotationTypes(value = "org.ez18n.MessageBundle")
-@SupportedSourceVersion(RELEASE_6)
+@SupportedSourceVersion(SourceVersion.RELEASE_8)
+@AutoService(Processor.class)
 public final class CSVReportProcessor extends AbstractProcessor {
 
     @Override

@@ -16,4 +16,5 @@
   <!-- Specify the app entry point class. -->
   <entry-point class='org.mdl4ui.gwt.sample.client.Sample' />
 
+  <collapse-all-properties />
 </module>

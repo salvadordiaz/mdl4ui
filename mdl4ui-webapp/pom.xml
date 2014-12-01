@@ -134,65 +134,6 @@
         </configuration>
       </plugin>
       <plugin>
-        <groupId>org.bsc.maven</groupId>
-        <artifactId>maven-processor-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>generate-i18n-source</id>
-            <goals>
-              <goal>process</goal>
-            </goals>
-            <phase>generate-sources</phase>
-            <configuration>
-              <compilerArguments>-encoding UTF-8</compilerArguments>
-              <outputDirectory>${project.build.directory}/generated-sources/apt</outputDirectory>
-              <processors>
-                <processor>org.ez18n.apt.processor.MessagesFactoryProcessor</processor>
-                <processor>org.ez18n.apt.processor.DesktopMessagesProcessor</processor>
-                <processor>org.ez18n.apt.processor.DesktopBundleProcessor</processor>
-                <processor>org.ez18n.apt.processor.DesktopBundlePropertiesProcessor</processor>
-                <processor>org.mdl4ui.base.apt.FieldLabelProcessor</processor>
-                <processor>org.mdl4ui.base.apt.FieldHelpProcessor</processor>
-                <processor>org.mdl4ui.base.apt.FieldPlaceholderProcessor</processor>
-                <processor>org.mdl4ui.base.apt.GwtFieldInitializerProcessor</processor>
-                <processor>org.mdl4ui.base.apt.J2seFieldInitializerProcessor</processor>
-                <processor>org.mdl4ui.base.apt.GwtFieldEditorProcessor</processor>
-                <processor>org.mdl4ui.base.apt.J2seFieldEditorProcessor</processor>
-                <processor>org.mdl4ui.base.apt.GwtFieldBehaviourProcessor</processor>
-                <processor>org.mdl4ui.base.apt.J2seFieldBehaviourProcessor</processor>
-              </processors>
-            </configuration>
-          </execution>
-          <execution>
-            <id>generate-i18n-resource</id>
-            <goals>
-              <goal>process</goal>
-            </goals>
-            <phase>generate-sources</phase>
-            <configuration>
-              <compilerArguments>-encoding UTF-8</compilerArguments>
-              <processors>
-                <processor>org.ez18n.apt.processor.CSVReportProcessor</processor>
-              </processors>
-            </configuration>
-          </execution>
-          <execution>
-            <id>generate-i18n-test</id>
-            <goals>
-              <goal>process-test</goal>
-            </goals>
-            <phase>generate-sources</phase>
-            <configuration>
-              <compilerArguments>-encoding UTF-8</compilerArguments>
-              <processors>
-                <processor>org.ez18n.apt.processor.TestDesktopBundleProcessor</processor>
-              </processors>
-              <sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-eclipse-plugin</artifactId>
         <configuration>

@@ -24,15 +24,19 @@ import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.user.client.ui.Widget;
 
 public class DefaultWizardView implements WizardView {
 
     private final Container container = new Container();
     private final Map<ScreenID, ScreenView> screenViews = new HashMap<>();
+    private final ScenarioID scenario;
 
     @Inject
     public DefaultWizardView(final Wizard wizard, GwtScreenFactory screenFactory, final ScenarioID scenario) {
+        this.scenario = scenario;
         Map<ScreenID, Screen> screens = wizard.getScreens();
         for (final ScreenID screenID : screens.keySet()) {
             final ScreenView screenView = screenFactory.getView(screens.get(screenID));
@@ -125,7 +129,7 @@ public class DefaultWizardView implements WizardView {
     }
 
     private void submitScreen(final Wizard wizard, final ScreenID screenID) {
-        ScreenID nextScreen = wizard.getScenario().nextScreen(screenID);
+        ScreenID nextScreen = scenario.nextScreen(screenID);
         if (nextScreen != null) {
             displayScreen(wizard, nextScreen);
         }

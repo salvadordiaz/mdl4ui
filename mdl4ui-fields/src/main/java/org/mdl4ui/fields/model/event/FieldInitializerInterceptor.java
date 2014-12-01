@@ -15,10 +15,6 @@ public final class FieldInitializerInterceptor extends EventInterceptor implemen
         this.delegate = delegate;
     }
 
-    public FieldInitializer getDelegate() {
-        return delegate;
-    }
-
     public void setFactory(FieldInitializerFactory factory) {
         this.factory = factory;
     }

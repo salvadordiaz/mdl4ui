@@ -25,16 +25,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.processing.Processor;
 import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.annotation.processing.SupportedSourceVersion;
+import javax.lang.model.SourceVersion;
 import javax.lang.model.element.TypeElement;
 
 import org.ez18n.apt.LabelTemplateMethod;
 import org.ez18n.apt.TemplateLoader;
 import org.ez18n.apt.macro.PropertyParsingException;
 
+import com.google.auto.service.AutoService;
+
 @SupportedAnnotationTypes(value = "org.ez18n.MessageBundle")
-@SupportedSourceVersion(RELEASE_6)
+@SupportedSourceVersion(SourceVersion.RELEASE_8)
+@AutoService(Processor.class)
 public final class DesktopMessagesProcessor extends LabelBundleProcessor {
     private final String template;
     private final String method_template;

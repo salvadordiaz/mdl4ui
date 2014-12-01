@@ -14,8 +14,6 @@ import org.mdl4ui.fields.model.validation.FieldValidation;
 
 public interface Wizard {
 
-    ScenarioID getScenario();
-
     WizardContext getContext();
 
     Map<ScreenID, Screen> getScreens();

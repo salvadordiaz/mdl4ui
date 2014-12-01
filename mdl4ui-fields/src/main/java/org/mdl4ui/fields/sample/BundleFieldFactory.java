@@ -8,9 +8,9 @@ import org.mdl4ui.fields.model.FieldHelpFactory;
 import org.mdl4ui.fields.model.FieldLabelFactory;
 import org.mdl4ui.fields.model.FieldMessageFactory;
 import org.mdl4ui.fields.model.FieldPlaceholderFactory;
-import org.mdl4ui.fields.sample.i18n.BundleFieldHelpFactory;
-import org.mdl4ui.fields.sample.i18n.BundleFieldLabelFactory;
-import org.mdl4ui.fields.sample.i18n.BundleFieldPlaceholderFactory;
+//import org.mdl4ui.fields.sample.i18n.BundleFieldHelpFactory;
+//import org.mdl4ui.fields.sample.i18n.BundleFieldLabelFactory;
+//import org.mdl4ui.fields.sample.i18n.BundleFieldPlaceholderFactory;
 
 public enum BundleFieldFactory {
     INSTANCE;
@@ -20,9 +20,9 @@ public enum BundleFieldFactory {
     private final FieldPlaceholderFactory[] placeholderFactories;
 
     BundleFieldFactory() {
-        labelFactories = new FieldLabelFactory[] { new BundleFieldLabelFactory() };
-        helpFactories = new FieldHelpFactory[] { new BundleFieldHelpFactory() };
-        placeholderFactories = new FieldPlaceholderFactory[] { new BundleFieldPlaceholderFactory() };
+        labelFactories = new FieldLabelFactory[] { /*new BundleFieldLabelFactory()*/ };
+        helpFactories = new FieldHelpFactory[] { /*new BundleFieldHelpFactory()*/ };
+        placeholderFactories = new FieldPlaceholderFactory[] { /*new BundleFieldPlaceholderFactory()*/ };
     }
 
     public String getLabel(ElementID elementId) {

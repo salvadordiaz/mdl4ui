@@ -69,11 +69,6 @@ public class DefaultWizard implements Wizard {
         return screens;
     }
 
-    @Override
-    public ScenarioID getScenario() {
-        return scenario;
-    }
-
     private Map<ScreenID, Screen> createScreens(ScenarioID scenario) {
         final Map<ScreenID, Screen> screens = new HashMap<>();
         for (ScreenID screenID : scenario.screens()) {

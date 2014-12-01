@@ -7,13 +7,18 @@ import static javax.lang.model.SourceVersion.RELEASE_6;
 
 import java.lang.annotation.Annotation;
 
+import javax.annotation.processing.Processor;
 import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.annotation.processing.SupportedSourceVersion;
+import javax.lang.model.SourceVersion;
 
 import org.mdl4ui.base.injection.InjectPlaceholder;
 
+import com.google.auto.service.AutoService;
+
 @SupportedAnnotationTypes(value = "org.mdl4ui.base.injection.InjectPlaceholder")
-@SupportedSourceVersion(RELEASE_6)
+@SupportedSourceVersion(SourceVersion.RELEASE_8)
+@AutoService(Processor.class)
 public class FieldPlaceholderProcessor extends FieldMessageProcessor {
 
     @Override
