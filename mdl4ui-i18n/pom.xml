@@ -34,12 +34,24 @@
 			<resource>
 				<directory>src/main/resources</directory>
 			</resource>
-			<resource>
+			<!--<resource>
 				<directory>${project.build.directory}/generated-resources/apt</directory>
 				<includes>
 					<include>META-INF/services/*</include>
 				</includes>
-			</resource>
+			</resource>-->
 		</resources>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<!-- Disable annotation processing for ourselves.-->
+					<compilerArgument>-proc:none</compilerArgument>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 </project>

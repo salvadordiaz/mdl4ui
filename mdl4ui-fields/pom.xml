@@ -41,7 +41,7 @@
       </resource>
       <resource>
         <filtering>false</filtering>
-        <directory>${project.build.directory}/generated-sources/apt</directory>
+        <directory>${project.build.directory}/generated-sources/annotations</directory>
         <targetPath>.</targetPath>
         <includes>
           <include>**/**.java</include>
@@ -52,7 +52,7 @@
     </resources>
     <testResources>
       <testResource>
-        <directory>${project.build.directory}/generated-sources/apt-test</directory>
+        <directory>${project.build.directory}/generated-sources/test-annotations</directory>
       </testResource>
     </testResources>
     <plugins>
@@ -70,7 +70,7 @@
             <configuration>
               <sources>
                 <source>src/test/resources</source>
-                <source>${project.build.directory}/generated-sources/apt-test</source>
+                <source>${project.build.directory}/generated-sources/test-annotations</source>
               </sources>
             </configuration>
           </execution>
