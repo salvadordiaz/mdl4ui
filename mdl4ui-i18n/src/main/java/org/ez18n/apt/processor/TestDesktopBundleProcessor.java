@@ -13,9 +13,10 @@ import javax.lang.model.element.TypeElement;
 
 import com.google.auto.service.AutoService;
 
+@Deprecated(/*should not generate tests for generated code*/)
 @SupportedAnnotationTypes(value = "org.ez18n.MessageBundle")
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
-@AutoService(Processor.class)
+//@AutoService(Processor.class)
 public class TestDesktopBundleProcessor extends TestBundleProcessor {
 
     @Override
